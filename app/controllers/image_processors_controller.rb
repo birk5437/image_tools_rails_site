@@ -1,6 +1,7 @@
 class ImageProcessorsController < ApplicationController
   # before_filter :redirect_unless_admin, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_image_processor, only: [:show, :edit, :update, :destroy, :vote]
+  respond_to :js, :only => [:create, :update, :destroy]
 
   # GET /image_processors
   # GET /image_processors.json
@@ -33,13 +34,15 @@ class ImageProcessorsController < ApplicationController
   # POST /image_processors
   # POST /image_processors.json
   def create
+    # raise "test"
     @image_processors = ImageProcessor.all.order("created_at desc")
     @image_processor = ImageProcessor.new(image_processor_params)
 
     respond_to do |format|
       if @image_processor.save
         format.html { redirect_to @image_processor, notice: 'ImageProcessor was successfully created.' }
-        format.json { render :show, status: :created, location: @image_processor }
+        format.json { render json: @image_processor}
+        format.js{ render :create }
       else
         format.html { render :new }
         format.json { render json: @image_processor.errors, status: :unprocessable_entity }
@@ -50,10 +53,12 @@ class ImageProcessorsController < ApplicationController
   # PATCH/PUT /image_processors/1
   # PATCH/PUT /image_processors/1.json
   def update
+    @image_processors = ImageProcessor.all.order("created_at desc")
     respond_to do |format|
       if @image_processor.update(image_processor_params)
         format.html { redirect_to @image_processor, notice: 'ImageProcessor was successfully updated.' }
         format.json { render :show, status: :ok, location: @image_processor }
+        format.js{ render :create }
       else
         format.html { render :edit }
         format.json { render json: @image_processor.errors, status: :unprocessable_entity }

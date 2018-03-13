@@ -12,18 +12,12 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.remotipart
 //= require bootstrap
 //= require underscore
-//= require jquery.tokeninput
 
-//= require jquery.ui.widget
-//= require jquery.iframe-transport
-//= require jquery.fileupload
-//= require cloudinary/jquery.cloudinary
-//= require attachinary
-//= require jquery.raty
-//= require ratyrate
-//= require chosen.jquery.min
+
+
 //= require jquery.minicolors
 //= require jquery.dropper
 

@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   post '/rate' => 'rater#create', :as => 'rate'
-  mount Attachinary::Engine => "/attachinary"
+  # mount Attachinary::Engine => "/attachinary"
 
   # resources :items
   resources :hotels do

@@ -1,6 +1,6 @@
 - if @image_processor.errors.present?
   = @image_processor.errors.full_messages.join("<br />").html_safe
-= form_for @image_processor, :html => { :class => 'form-horizontal form-model' } do |f|
+= form_for @image_processor, remote: true, :html => {:format => "js", :class => 'form-horizontal form-model' } do |f|
   .form-group
     = f.label :name, :class => 'control-label col-md-2'
     .col-md-10

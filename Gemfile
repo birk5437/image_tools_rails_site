@@ -4,7 +4,8 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
 # Use postgresql as the database for Active Record
-gem 'pg'
+# gem 'pg
+gem 'pg', '0.20.0'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
@@ -15,9 +16,9 @@ gem 'coffee-rails', '~> 4.0.0'
 # gem 'therubyracer',  platforms: :ruby
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails'
+gem 'jquery-rails', '~> 3.0'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.0'
+# gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
@@ -72,13 +73,15 @@ gem 'underscore-rails'
 gem 'iconv'
 gem 'google-search'
 gem 'acts-as-taggable-on', '~> 3.4'
-gem 'cloudinary', '~> 1.1', '>= 1.1.2'
-gem 'attachinary'
-gem 'ratyrate', :github => 'wazery/ratyrate', :branch => 'master'
+# gem 'cloudinary', '~> 1.1', '>= 1.1.2'
+# gem 'attachinary'
+# gem 'ratyrate', :github => 'wazery/ratyrate', :branch => 'master'
 gem 'rails_12factor', group: :production
 
 # http://railscasts.com/episodes/258-token-fields?view=asciicast
-gem 'jquery-tokeninput-rails'
+# gem 'jquery-tokeninput-rails'
 gem 'chunky_png'
 gem 'jquery-minicolors-rails'
 # TODO: also look at this https://github.com/sstrudeau/jquery-dropper
+
+gem 'remotipart', '~> 1.2'
