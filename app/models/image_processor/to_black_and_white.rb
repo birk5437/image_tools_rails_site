@@ -1,6 +1,6 @@
 class ImageProcessor::ToBlackAndWhite < ImageProcessor
-  def process
-    png = source_image_chunky_png
+  def process(paperclip_attachment_or_style=source_image)
+    png = paperclip_attachment_or_style.as_chunky_png
     dim = png.dimension
     # puts dim.width
     # puts dim.height

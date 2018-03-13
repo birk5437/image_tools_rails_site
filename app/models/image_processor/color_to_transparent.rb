@@ -1,12 +1,12 @@
 class ImageProcessor::ColorToTransparent < ImageProcessor
-  def process
+  def process(paperclip_attachment=source_image)
     # file_name = source_image.path
     # directory = ARGV[0].gsub(file_name, "")
     # new_file_name = "#{file_name.gsub('.png', '')}_transparent.png"
 
     white_cutoff = 240
 
-    png = source_image_chunky_png
+    png = paperclip_attachment.as_chunky_png
     # png = ChunkyPNG::Image.from_blob(ARGF)
     dim = png.dimension
     # puts dim.width
