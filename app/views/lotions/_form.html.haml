@@ -1,0 +1,40 @@
+- if @lotion.errors.present?
+  = @lotion.errors.full_messages.join("<br />").html_safe
+= form_for @lotion, :html => { :class => 'form-horizontal form-model' } do |f|
+  .form-group
+    = f.label :name, :class => 'control-label col-md-2'
+    .col-md-10
+      = f.text_field :name, :class => 'text-field form-control', autocomplete: "off"
+  .form-group
+    = f.label :description, :class => 'control-label col-md-2'
+    .col-md-10
+      = f.text_area :description, :class => 'text-area form-control', autocomplete: "off"
+  .form-group
+    = f.label :image1, :class => 'control-label col-md-2'
+    = image_tag @lotion.image1.url(:tiny), class: "image" if @lotion.image1.present?
+    .col-md-10
+      = f.file_field :image1
+  .form-group
+    = f.label :image2, :class => 'control-label col-md-2'
+    = image_tag @lotion.image2.url(:tiny), class: "image" if @lotion.image2.present?
+    .col-md-10
+      = f.file_field :image2
+  .form-group
+    = f.label :hotels, :class => 'control-label col-md-2'
+    .col-md-10
+      =# collection_check_boxes(:lotion, :hotel_ids, Hotel.all, :id, :name)
+      = collection_select(:lotion, :hotel_ids, Hotel.all, :id, :name, {}, multiple: true, class: 'chosen', style: "min-width: '200px';")
+      =# f.select_tag 'lotion[hotel_ids]', options_from_collection_for_select(Hotel.all, "id", "name"), multiple: true, class: 'chosen chosen-select'
+  .form-group
+    .col-md-offset-2.col-md-10
+      = f.submit nil, :class => 'btn btn-primary'
+      = link_to t('.cancel', :default => t("helpers.links.cancel")), |
+        lotions_path, :class => 'btn btn-default'
+
+
+
+:javascript
+  $(document).ready(function(){
+    //$("select[name='lotion[hotel_ids]']").chosen();
+    $(".chosen").chosen();
+  });

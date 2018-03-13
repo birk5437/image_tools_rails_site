@@ -1,0 +1,34 @@
+- if @image_processor.errors.present?
+  = @image_processor.errors.full_messages.join("<br />").html_safe
+= form_for @image_processor, :html => { :class => 'form-horizontal form-model' } do |f|
+  .form-group
+    = f.label :name, :class => 'control-label col-md-2'
+    .col-md-10
+      = f.text_field :option1
+      =# text_field_tag "option1", nil, :class => 'text-field form-control minicolors'
+  .form-group
+    = f.label :type, :class => 'control-label col-md-2'
+    .col-md-10
+      =# collection_select(:image_processor, :type, ImageProcessor::TYPES)
+      = select_tag 'image_processor[type]', options_for_select(ImageProcessor::TYPES)
+  .form-group
+    = f.label :source_image, :class => 'control-label col-md-2'
+    = image_tag @image_processor.source_image.url(:tiny), class: "image" if @image_processor.source_image.present?
+    .col-md-10
+      = f.file_field :source_image
+  .form-group
+    .col-md-offset-2.col-md-10
+      = f.submit nil, :class => 'btn btn-primary'
+      = link_to t('.cancel', :default => t("helpers.links.cancel")), |
+        image_processors_path, :class => 'btn btn-default'
+
+
+
+:javascript
+  $(document).ready(function(){
+    //$("select[name='image_processor[hotel_ids]']").chosen();
+    $(".chosen").chosen();
+    $(".minicolors").minicolors();
+    $('img').dropper();
+    // TODO: look at this too https://github.com/sstrudeau/jquery-dropper
+  });

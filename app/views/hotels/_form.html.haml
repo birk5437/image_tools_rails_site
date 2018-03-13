@@ -1,0 +1,23 @@
+- if @hotel.errors.present?
+  = @hotel.errors.full_messages.join("<br />").html_safe
+= form_for @hotel, :html => { :class => 'form-horizontal form-model' } do |f|
+  .form-group
+    = f.label :name, :class => 'control-label col-md-2'
+    .col-md-10
+      = f.text_field :name, :class => 'text-field form-control', autocomplete: "off"
+  .form-group
+    = f.label :logo, :class => 'control-label col-md-2'
+    = image_tag @hotel.logo.url(:tiny), class: "image" if @hotel.logo.present?
+    .col-md-10
+      = f.file_field :logo
+      =# f.text_field :logo_url, :class => 'text-field form-control', autocomplete: "off"
+  .form-group
+    .col-md-offset-2.col-md-10
+      = f.submit nil, :class => 'btn btn-primary'
+      = link_to t('.cancel', :default => t("helpers.links.cancel")), |
+        hotels_path, :class => 'btn btn-default'                      |
+
+:javascript
+  $(document).ready(function(){
+    $('.attachinary-input').attachinary();
+  });

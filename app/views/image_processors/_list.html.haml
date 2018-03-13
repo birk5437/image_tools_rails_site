@@ -1,0 +1,18 @@
+%table
+  %thead
+    %tr
+      %th= "ID"
+      %th= "Source Image"
+      %th= "Image Processor Type"
+      %th= "Processed Image"
+  %tbody
+    - image_processors.each do |image_processor|
+      %tr
+        %td= image_processor.id
+        %td
+          %img{ src: "#{image_processor.source_image.url(:small)}" }
+        %td= image_processor.type
+        %td
+          - if image_processor.processed_image.present?
+            %a{href: image_processor.processed_image.url}
+              %img{ src: "#{image_processor.processed_image.url(:small)}" }

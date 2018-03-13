@@ -1,0 +1,4 @@
+- model_class = User
+.page-header
+  %h1= t '.title', :default => [:'helpers.titles.edit', 'Add New %{model}'], :model => User
+= render :partial => 'form'

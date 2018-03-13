@@ -1,0 +1,37 @@
+-# http://www.responsivewebmobile.com/posts/view/2013/06/04/5/Responsive_Pin_Page_templates_free
+
+- model_class = Hotel
+- item_width = local_assigns[:item_width] || 270
+
+#hotels
+  - hotels.each do |hotel|
+    .masonry-item.masonry-brick{ style: "width: #{item_width}px;" }
+      - if local_assigns[:show_name]
+        %h5.text-center
+          - truncated_name = truncate(hotel.name, length: 40, omission: "", separator: " ")
+          = link_to(truncated_name, hotel_url(hotel))
+      .picture
+        %a.image{:href => hotel_url(hotel), :title => "Title"}
+          = image_tag hotel.logo.url(:medium)
+
+        - if !local_assigns[:hide_crud] && (current_user.present? && (current_user.admin? || hotel.created_by == current_user || current_user.superuser?))
+          .meta
+            %span
+              - if current_user.admin?
+                = link_to "Info", hotel_path(hotel)#, {:class => "btn btn-default"}
+              - if (hotel.created_by == current_user) || current_user.superuser?
+                = link_to "Edit", edit_hotel_path(hotel)#, {:class => "btn btn-primary"}
+                = link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      hotel_path(hotel),
+                      :method => 'delete',
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }
+
+:javascript
+  var $container = $('#hotels');
+      $container.imagesLoaded(function(){
+      $container.masonry({
+        hotelSelector : '.hotel',
+        columnWidth : 290,
+        isAnimated: true
+      });
+    });

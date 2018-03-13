@@ -1,0 +1,9 @@
+.page-header
+  %h2 Source Image
+  %a{href: @image_processor.source_image.url}
+    = image_tag @image_processor.source_image.url(:medium) if @image_processor.source_image.present?
+  
+  - if @image_processor.processed_image.present?
+    %h2 Processed Image
+    %a{href: @image_processor.processed_image.url}
+      = image_tag @image_processor.processed_image.url(:medium)

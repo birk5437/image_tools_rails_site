@@ -1,0 +1,15 @@
+-# http://www.responsivewebmobile.com/posts/view/2013/06/04/5/Responsive_Pin_Page_templates_free
+
+- model_class = Lotion
+
+= render partial: "list", :locals => {:lotions => @lotions, :show_name => true, :show_hotels => true}
+
+:javascript
+  var $container = $('#lotions');
+      $container.imagesLoaded(function(){
+      $container.masonry({
+        lotionSelector : '.lotion',
+        columnWidth : 290,
+        isAnimated: true
+      });
+    });

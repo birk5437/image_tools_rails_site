@@ -1,0 +1,24 @@
+- if @user.errors.present?
+  = @user.errors.full_messages.join("<br />").html_safe
+= form_for @user, :html => { :class => 'form-horizontal form-model' } do |f|
+  .form-group
+    = f.label :email, :class => 'control-label col-md-2'
+    .col-md-10
+      = f.text_field :email, :class => 'text-field form-control', autocomplete: "off"
+  .form-group
+    = f.label :password, :class => 'control-label col-md-2'
+    .col-md-10
+      = f.text_field :password, :class => 'text-field form-control', autocomplete: "off"
+  .form-group
+    = f.label :admin, :class => 'control-label col-md-2'
+    .col-md-10
+      = f.check_box :admin, :class => 'text-field form-control', autocomplete: "off"
+  .form-group
+    = f.label :superuser, :class => 'control-label col-md-2'
+    .col-md-10
+      = f.check_box :superuser, :class => 'text-field form-control', autocomplete: "off"
+  .form-group
+    .col-md-offset-2.col-md-10
+      = f.submit nil, :class => 'btn btn-primary'
+      = link_to t('.cancel', :default => t("helpers.links.cancel")), |
+        users_path, :class => 'btn btn-default'                      |

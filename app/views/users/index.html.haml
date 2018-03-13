@@ -1,0 +1,47 @@
+-# http://www.responsivewebmobile.com/posts/view/2013/06/04/5/Responsive_Pin_Page_templates_free
+
+- model_class = User
+
+#users
+  - @users.each do |user|
+    .user.masonry-brick
+      %h5.text-center
+        - truncated_name = truncate(user.name, length: 40, omission: "", separator: " ")
+        = link_to(truncated_name, user_url(user))
+      .picture
+        %a.image{:href => user_url(user), :title => "Title"}
+          %img{:alt => "", :src => user.logo_url}/
+        .user-content
+          .description
+            %p=""
+          .meta
+            %span.price
+              -#%i.icon-calendar
+              =# money_format(user.price)
+            %span
+              -#%i.icon-user
+              -#%a.btn.btn-green-with-white{href: user.affiliate_url, style: "float: right;", target: "_blank"} View Lotions
+            -#%span
+            -#  %i.icon-heart-empty
+            -#  10
+          - if current_user.present? && (current_user.admin? || user.created_by == current_user || current_user.superuser?)
+            .meta
+              %span
+                - if current_user.admin?
+                  = link_to "Info", user_path(user)#, {:class => "btn btn-default"}
+                - if (user.created_by == current_user) || current_user.superuser?
+                  = link_to "Edit", edit_user_path(user)#, {:class => "btn btn-primary"}
+                  = link_to t('.destroy', :default => t("helpers.links.destroy")),
+                        user_path(user),
+                        :method => 'delete',
+                        :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }
+
+:javascript
+  var $container = $('#users');
+      $container.imagesLoaded(function(){
+      $container.masonry({
+        userSelector : '.user',
+        columnWidth : 290,
+        isAnimated: true
+      });
+    });
