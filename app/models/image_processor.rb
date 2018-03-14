@@ -33,7 +33,7 @@ class ImageProcessor < ActiveRecord::Base
 
   def process_the_image
     begin
-      process(source_image.styles[:medium])
+      process(source_image.styles[:medium], option1)
       # process(source_image)
     rescue => e
       errors.add(:base, e.message)

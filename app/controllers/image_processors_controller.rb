@@ -46,6 +46,7 @@ class ImageProcessorsController < ApplicationController
       else
         format.html { render :new }
         format.json { render json: @image_processor.errors, status: :unprocessable_entity }
+        format.js{ render :create }
       end
     end
   end
@@ -63,6 +64,7 @@ class ImageProcessorsController < ApplicationController
       else
         format.html { render :edit }
         format.json { render json: @image_processor.errors, status: :unprocessable_entity }
+        format.js{ render :create }
       end
     end
   end
@@ -117,6 +119,6 @@ class ImageProcessorsController < ApplicationController
           params[:image_processor][k] = v 
         end
       end
-      params.require(:image_processor).permit(:type, :source_image, :processed_image)
+      params.require(:image_processor).permit(:type, :source_image, :processed_image, :option1)
     end
 end

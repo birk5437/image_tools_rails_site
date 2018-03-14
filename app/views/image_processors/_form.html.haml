@@ -1,25 +1,25 @@
 - if @image_processor.errors.present?
   = @image_processor.errors.full_messages.join("<br />").html_safe
 
-= image_tag @image_processor.source_image.url(:medium), class: "image" if @image_processor.source_image.present?
+= image_tag @image_processor.source_image.url(:medium), class: "image source-image" if @image_processor.source_image.present?
 = image_tag @image_processor.processed_image.url(:medium), class: "image processed-image", style: "display: none;" if @image_processor.processed_image.present?
 
 = form_for @image_processor, remote: true, :html => {:format => "js", :class => 'form-horizontal form-model' } do |f|
-  .form-group
-    = f.label :name, :class => 'control-label col-md-2'
-    .col-md-10
-      = f.text_field :option1
-      =# text_field_tag "option1", nil, :class => 'text-field form-control minicolors'
-  .form-group
-    = f.label :type, :class => 'control-label col-md-2'
-    .col-md-10
-      =# collection_select(:image_processor, :type, ImageProcessor::TYPES)
-      = select_tag 'image_processor[type]', options_for_select(ImageProcessor::TYPES, @image_processor.type)
   .form-group
     = f.label :source_image, :class => 'control-label col-md-2'
     =# image_tag @image_processor.source_image.url(:tiny), class: "image" if @image_processor.source_image.present?
     .col-md-10
       = f.file_field :source_image
+  .form-group
+    = f.label :type, :class => 'control-label col-md-2'
+    .col-md-10
+      =# collection_select(:image_processor, :type, ImageProcessor::TYPES)
+      = select_tag 'image_processor[type]', options_for_select(ImageProcessor::TYPES, @image_processor.type)
+
+  %h2= @image_processor.type
+  - if @image_processor.type.present?
+    = render partial: "#{@image_processor.type.split('::').last.underscore}_options", locals: {:f => f}
+
 
 
 
@@ -28,7 +28,15 @@
     //$("select[name='image_processor[hotel_ids]']").chosen();
     // $(".chosen").chosen();
     // $(".minicolors").minicolors();
-    // $('img').dropper();
+    $(".color-to-transparent-option1-input").on("focus", function(e){
+      e.preventDefault();
+    });
+    $('img.source-image').dropper({
+      clickCallback: function(color) {
+        $(".color-to-transparent-option1-input").val("#" + color.rgbhex);
+        $(".color-to-transparent-option1-input").trigger("change");
+      }
+    });
     $(".processed-image").fadeIn('slow');
     $(":input").on("change", function(){
       $(".processed-image").fadeOut('slow');
