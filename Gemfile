@@ -81,6 +81,7 @@ gem 'rails_12factor', group: :production
 # http://railscasts.com/episodes/258-token-fields?view=asciicast
 # gem 'jquery-tokeninput-rails'
 gem 'chunky_png'
+gem 'kmeans-clusterer'
 gem 'jquery-minicolors-rails'
 # TODO: also look at this https://github.com/sstrudeau/jquery-dropper
 

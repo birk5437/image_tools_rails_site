@@ -7,7 +7,7 @@
       %span.icon-bar
       %span.icon-bar
 
-    = link_to image_tag("logo.png", style: "height: 85%"), defined?(root_path) ? root_path : "#", class: "navbar-brand", style: "padding: 0; padding-top: 3px;"
+    =# link_to image_tag("logo.png", style: "height: 85%"), defined?(root_path) ? root_path : "#", class: "navbar-brand", style: "padding: 0; padding-top: 3px;"
     =# link_to "Hotel Lotion Database!", defined?(root_path) ? root_path : "#", class: "navbar-brand", style: "padding: 0; padding-top: 3px;"
   -# Collect the nav links, forms, and other content for toggling
   #navbar-collapse-1.collapse.navbar-collapse
@@ -23,15 +23,10 @@
               - if tag.hotels.present?
                 %li= link_to tag.name, "/tags/#{tag.dehumanized_name}"
     %ul.nav.navbar-nav.navbar-right
-      %li= link_to "View Hotels", hotels_path
-      %li= link_to "View Lotions", lotions_path
       - if defined?(Devise)
         - if user_signed_in?
           - if current_user.superuser?
             %li= link_to "Add New User", new_user_path
-          - if current_user.admin?
-            %li= link_to "Add New Hotel", new_hotel_path
-            %li= link_to "Add New Lotion", new_lotion_path
           %li.dropdown
             %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
               = current_user.email

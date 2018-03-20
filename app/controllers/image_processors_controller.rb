@@ -119,6 +119,6 @@ class ImageProcessorsController < ApplicationController
           params[:image_processor][k] = v 
         end
       end
-      params.require(:image_processor).permit(:type, :source_image, :processed_image, :option1)
+      params.require(:image_processor).permit(:type, :source_image, :processed_image, :option1, :option2)
     end
 end

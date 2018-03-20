@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   resources :image_processors
   resources :image_processor_color_to_transparents, :controller => :image_processors#, :type => "ImageProcessor::ColorToTransparent"
   resources :image_processor_to_black_and_whites, :controller => :image_processors#, :type => "ImageProcessor::ToBlackAndWhite"
+  resources :image_processor_flatten_colors, :controller => :image_processors#, :type => "ImageProcessor::ToBlackAndWhite"
 
   # resources :tags, only: [:index]
   # match '/tags/:dehumanized_name', :via => :get, :to => 'tags#show'

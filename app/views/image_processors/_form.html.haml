@@ -1,8 +1,17 @@
 - if @image_processor.errors.present?
   = @image_processor.errors.full_messages.join("<br />").html_safe
 
-= image_tag @image_processor.source_image.url(:medium), class: "image source-image" if @image_processor.source_image.present?
-= image_tag @image_processor.processed_image.url(:medium), class: "image processed-image", style: "display: none;" if @image_processor.processed_image.present?
+%table
+  %tr
+    %td
+      %h4= "Source Image"
+    %td
+      %h4= "Processed Image"
+  %tr
+    %td
+      = image_tag @image_processor.source_image.url(:medium), class: "image source-image" if @image_processor.source_image.present?
+    %td
+      = image_tag @image_processor.processed_image.url(:medium), class: "image processed-image", style: "display: none;" if @image_processor.processed_image.present?
 
 = form_for @image_processor, remote: true, :html => {:format => "js", :class => 'form-horizontal form-model' } do |f|
   .form-group
@@ -14,7 +23,8 @@
     = f.label :type, :class => 'control-label col-md-2'
     .col-md-10
       =# collection_select(:image_processor, :type, ImageProcessor::TYPES)
-      = select_tag 'image_processor[type]', options_for_select(ImageProcessor::TYPES, @image_processor.type)
+      = select_tag 'image_processor[type]', options_for_select([""] + ImageProcessor::TYPES, @image_processor.type)
+      =# f.input :type, as: :select, include_blank: true
 
   %h2= @image_processor.type
   - if @image_processor.type.present?
@@ -28,6 +38,9 @@
     //$("select[name='image_processor[hotel_ids]']").chosen();
     // $(".chosen").chosen();
     // $(".minicolors").minicolors();
+    $(".range-input").on("change", function(){
+      $(this).append($(this).val());
+    });
     $(".color-to-transparent-option1-input").on("focus", function(e){
       e.preventDefault();
     });

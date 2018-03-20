@@ -1,0 +1,6 @@
+.form-group
+  = f.label :option1, "Target Number of Colors", :class => 'control-label col-md-2'
+  .col-md-10
+    = f.text_field :option1, type: "range", min: "1", max: "10", class: "range-input"
+    =# f.text_field :option1
+    =# text_field_tag "option1", nil, :class => 'text-field form-control minicolors'

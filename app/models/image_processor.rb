@@ -2,7 +2,8 @@ class ImageProcessor < ActiveRecord::Base
 
   TYPES = [
     "ImageProcessor::ColorToTransparent",
-    "ImageProcessor::ToBlackAndWhite"
+    "ImageProcessor::ToBlackAndWhite",
+    "ImageProcessor::FlattenColor"
   ]
 
   validates_presence_of :source_image
@@ -33,7 +34,7 @@ class ImageProcessor < ActiveRecord::Base
 
   def process_the_image
     begin
-      process(source_image.styles[:medium], option1)
+      process(source_image.styles[:medium], option1, option2)
       # process(source_image)
     rescue => e
       errors.add(:base, e.message)
