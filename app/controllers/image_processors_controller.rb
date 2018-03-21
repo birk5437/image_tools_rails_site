@@ -55,7 +55,9 @@ class ImageProcessorsController < ApplicationController
   # PATCH/PUT /image_processors/1.json
   def update
     @image_processors = ImageProcessor.all.order("created_at desc")
-    @image_processor = @image_processor.becomes!(image_processor_params[:type].constantize) if image_processor_params[:type].present?
+    if image_processor_params[:type] != @image_processor.type
+      @image_processor = @image_processor.becomes!(image_processor_params[:type].constantize) if image_processor_params[:type].present?
+    end
     respond_to do |format|
       if @image_processor.update(image_processor_params)
         format.html { redirect_to @image_processor, notice: 'ImageProcessor was successfully updated.' }

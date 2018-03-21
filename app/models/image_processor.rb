@@ -12,7 +12,7 @@ class ImageProcessor < ActiveRecord::Base
   has_attached_file :source_image, 
     :path =>":rails_root/public/images/assets/source_images/:id/:style.:extension", 
     :url => "/images/assets/source_images/:id/:style.:extension",
-    :styles => { :small => "150x150>", :medium => "400x300>"}
+    :styles => { :small => "150x150>", :medium => "400x300>", :large => "1024x768>"}
   # validates_attachment :source_image, content_type: { content_type: ["image/jpg", "image/jpeg", "image/png", "image/gif"] }
   validates_attachment_content_type :source_image, :content_type => /image/
 
@@ -33,12 +33,16 @@ class ImageProcessor < ActiveRecord::Base
   end
 
   def process_the_image
-    begin
-      process(source_image.styles[:medium], option1, option2)
-      # process(source_image)
-    rescue => e
-      errors.add(:base, e.message)
-      raise ActiveRecord::RecordInvalid, self
-    end
+    process(source_image.styles[:large], option1, option2)
+    # begin
+    #   process(source_image.styles[:medium], option1, option2)
+    #   # process(source_image)
+    # rescue => e
+    #   errors.add(:base, e.message)
+    #   raise ActiveRecord::RecordInvalid, self
+    # end
+  end
+
+  def process(a,b,c)
   end
 end

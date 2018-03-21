@@ -1,4 +1,14 @@
 class ImageProcessor::ColorToTransparent < ImageProcessor
+  before_validation :set_default_option1, :set_default_option2
+
+  def set_default_option1
+    self.option1 = "#FFFFFF" if option1.blank? || type_changed?
+  end
+
+  def set_default_option2
+    self.option2 = "50" if option2.blank? || type_changed?
+  end
+
   def process(paperclip_attachment=source_image, target_color="#FFFFFF", eucledian_distance_range="0")
     # file_name = source_image.path
     # directory = ARGV[0].gsub(file_name, "")

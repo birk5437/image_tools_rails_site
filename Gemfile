@@ -1,4 +1,6 @@
 source 'https://rubygems.org'
+# source 'https://rails-assets.org'
+# gem 'rails-assets-spin'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

@@ -3,7 +3,10 @@ class ImageProcessor::FlattenColor < ImageProcessor
   before_validation :set_default_option1
 
   def set_default_option1
-    self.option1 = "3" if option1.blank?
+    Rails::logger.warn("BURKE - type #{type}")
+    Rails::logger.warn("BURKE - type was #{type_was}")
+    Rails::logger.warn("BURKE - type changed? #{type_changed?}")
+    self.option1 = "3" if option1.blank? || type_changed?
   end
   def process(paperclip_attachment=source_image, number_of_colors="3", option2=nil)
     number_of_colors = number_of_colors.presence || "3"
