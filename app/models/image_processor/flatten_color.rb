@@ -1,6 +1,11 @@
 class ImageProcessor::FlattenColor < ImageProcessor
   validates :option1, presence: true
-  def process(paperclip_attachment=source_image, number_of_colors=3, option2=nil)
+  before_validation :set_default_option1
+
+  def set_default_option1
+    self.option1 = "3" if option1.blank?
+  end
+  def process(paperclip_attachment=source_image, number_of_colors="3", option2=nil)
     number_of_colors = number_of_colors.presence || "3"
     png = paperclip_attachment.as_chunky_png
     dim = png.dimension

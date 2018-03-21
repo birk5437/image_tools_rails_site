@@ -3,24 +3,28 @@
 
 %table
   %tr
-    %td
-      %h4= "Source Image"
-    %td
-      %h4= "Processed Image"
+    - if @image_processor.source_image.present?
+      %td
+        %h4= "Source Image"
+    - if @image_processor.processed_image.present?
+      %td
+        %h4= "Processed Image"
   %tr
-    %td
-      = image_tag @image_processor.source_image.url(:medium), class: "image source-image" if @image_processor.source_image.present?
-    %td
-      = image_tag @image_processor.processed_image.url(:medium), class: "image processed-image", style: "display: none;" if @image_processor.processed_image.present?
+    - if @image_processor.source_image.present?
+      %td
+        = image_tag @image_processor.source_image.url(:medium), class: "image source-image"
+    - if @image_processor.processed_image.present?
+      %td
+        = image_tag @image_processor.processed_image.url(:medium), class: "image processed-image", style: "display: none;"
 
 = form_for @image_processor, remote: true, :html => {:format => "js", :class => 'form-horizontal form-model' } do |f|
+  -#.form-group{style: @image_processor.type.present? ? "" : "display: none;"}
   .form-group
-    = f.label :source_image, :class => 'control-label col-md-2'
-    =# image_tag @image_processor.source_image.url(:tiny), class: "image" if @image_processor.source_image.present?
+    = f.label :source_image, :class => 'control-label source-image-input col-md-2'
     .col-md-10
       = f.file_field :source_image
   .form-group
-    = f.label :type, :class => 'control-label col-md-2'
+    = f.label :type, "Select Image Tool", :class => 'control-label col-md-2'
     .col-md-10
       =# collection_select(:image_processor, :type, ImageProcessor::TYPES)
       = select_tag 'image_processor[type]', options_for_select([""] + ImageProcessor::TYPES, @image_processor.type)
@@ -29,6 +33,9 @@
   %h2= @image_processor.type
   - if @image_processor.type.present?
     = render partial: "#{@image_processor.type.split('::').last.underscore}_options", locals: {:f => f}
+
+- if @image_processor.processed_image.present?
+  = button_to "Download Processed Image", "#"
 
 
 
