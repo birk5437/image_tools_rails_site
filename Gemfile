@@ -88,3 +88,4 @@ gem 'jquery-minicolors-rails'
 # TODO: also look at this https://github.com/sstrudeau/jquery-dropper
 
 gem 'remotipart', '~> 1.2'
+gem "mini_magick"

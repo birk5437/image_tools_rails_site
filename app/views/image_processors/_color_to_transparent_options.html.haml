@@ -4,7 +4,7 @@
     = f.text_field :option1, type: "color", class: "color-to-transparent-option1-input"
     =# text_field_tag "option1", nil, :class => 'text-field form-control minicolors'
 .form-group
-  = f.label :option2, "Color To Make Transparent", :class => 'control-label col-md-2'
+  = f.label :option2, "Color Margin of Error", :class => 'control-label col-md-2'
   .col-md-10
     = f.text_field :option2, type: "range", min: "0", max: ChunkyPNG::Color::MAX_EUCLIDEAN_DISTANCE_RGBA.to_s, class: "range-input"
     =# text_field_tag "option1", nil, :class => 'text-field form-control minicolors'

@@ -152,6 +152,7 @@ GEM
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
     mimemagic (0.3.2)
+    mini_magick (4.8.0)
     mini_mime (1.0.0)
     mini_portile2 (2.3.0)
     minitest (5.11.3)
@@ -283,6 +284,7 @@ DEPENDENCIES
   jquery-minicolors-rails
   jquery-rails (~> 3.0)
   kmeans-clusterer
+  mini_magick
   nokogiri (~> 1.6)
   omniauth
   paperclip (~> 5.1.0)

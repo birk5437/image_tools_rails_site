@@ -26,7 +26,7 @@ class ImageProcessor::FlattenColor < ImageProcessor
           next
         end
 
-        Rails::logger.warn("loading data")
+        # Rails::logger.warn("loading data")
         data << [ChunkyPNG::Color.r(color_value), ChunkyPNG::Color.g(color_value), ChunkyPNG::Color.b(color_value), ChunkyPNG::Color.a(color_value)]
         # data << png[x,y]
       end
@@ -41,7 +41,8 @@ class ImageProcessor::FlattenColor < ImageProcessor
     # badge  = ChunkyPNG::Image.from_file('no_ie_badge.png')
 
     Rails::logger.warn("running kmeans")
-    kmeans = KMeansClusterer.run number_of_colors.to_i, data, runs: 1, log: true
+    kmeans = KMeansClusterer.run number_of_colors.to_i, data, runs: 1#, log: true
+    Rails::logger.warn("predicting")
 
 
     for y in 0..dim.height - 1 do
@@ -54,7 +55,7 @@ class ImageProcessor::FlattenColor < ImageProcessor
         end
         # data << [ChunkyPNG::Color.r(color_value), ChunkyPNG::Color.g(color_value), ChunkyPNG::Color.b(color_value)]
         # data << png[x,y]
-        Rails::logger.warn("predicting")
+        # Rails::logger.warn("predicting")
         predicted = kmeans.predict [[ChunkyPNG::Color.r(color_value), ChunkyPNG::Color.g(color_value), ChunkyPNG::Color.b(color_value), ChunkyPNG::Color.a(color_value)]]
         centroid_data = Array(kmeans.clusters[predicted[0]].centroid.data).map{ |d| d.round(0).to_i }
         png[x,y] = ChunkyPNG::Color.rgba(centroid_data[0], centroid_data[1],centroid_data[2], centroid_data[3])

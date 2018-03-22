@@ -33,7 +33,7 @@
   - if @image_processor.type.present?
     = render partial: "#{@image_processor.type.split('::').last.underscore}_options", locals: {:f => f}
 
-- if @image_processor.processed_image.present?
+- if false#@image_processor.processed_image.present?
   = button_to "Download Processed Image", "#"
 
 
