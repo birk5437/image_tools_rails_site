@@ -1,22 +1,5 @@
 Rails.application.routes.draw do
 
-  post '/rate' => 'rater#create', :as => 'rate'
-  # mount Attachinary::Engine => "/attachinary"
-
-  # resources :items
-  resources :hotels do
-    #->Prelang (voting/acts_as_votable)
-    member do
-      get "vote"
-    end
-  end
-  resources :lotions do
-    #->Prelang (voting/acts_as_votable)
-    member do
-      get "vote"
-    end
-  end
-
   resources :users
   resources :image_processors
   resources :image_processor_color_to_transparents, :controller => :image_processors#, :type => "ImageProcessor::ColorToTransparent"
