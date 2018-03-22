@@ -50,12 +50,12 @@
     $(".color-to-transparent-option1-input").on("focus", function(e){
       e.preventDefault();
     });
-    $('img.source-image').dropper({
-      clickCallback: function(color) {
-        $(".color-to-transparent-option1-input").val("#" + color.rgbhex);
-        $(".color-to-transparent-option1-input").trigger("change");
-      }
-    });
+    // $('img.source-image').dropper({
+    //   clickCallback: function(color) {
+    //     $(".color-to-transparent-option1-input").val("#" + color.rgbhex);
+    //     $(".color-to-transparent-option1-input").trigger("change");
+    //   }
+    // });
     $(".processed-image").fadeIn('slow');
     $(":input").on("change", function(){
       $(".processed-image").fadeOut('slow');
