@@ -18,7 +18,9 @@ class ImageProcessor::FlattenColor < ImageProcessor
     data = []
 
     for y in 0..dim.height - 1 do
-      for x in 0..dim.width - 1 do  
+      next unless y % 2 == 0
+      for x in 0..dim.width - 1 do
+        next unless x % 2 == 0
         color_value = png[x,y]
 
         if ChunkyPNG::Color.a(color_value) == 0
@@ -41,7 +43,7 @@ class ImageProcessor::FlattenColor < ImageProcessor
     # badge  = ChunkyPNG::Image.from_file('no_ie_badge.png')
 
     Rails::logger.warn("running kmeans")
-    kmeans = KMeansClusterer.run number_of_colors.to_i, data, runs: 1, max_iter: 50#, log: true
+    kmeans = KMeansClusterer.run number_of_colors.to_i, data, runs: 1, max_iter: 5#, log: true
     Rails::logger.warn("predicting")
 
 
